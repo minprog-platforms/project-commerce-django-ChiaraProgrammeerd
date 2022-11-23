@@ -1,8 +1,9 @@
-# Application Name
+# Commerce Website
 
-TODO: Describe your application here.
+Website where users can sell items as well as bid on and buy items.
 
 
-## Getting Started
+## Design Document
 
-TODO: Describe steps to install requirements and get the application running.
+![listings page (default page)](imagesdesignproject/Defaultpage.jpg?raw=true)
+![create new listing](imagesdesignproject/createlistingpage.jpg?raw=true)
