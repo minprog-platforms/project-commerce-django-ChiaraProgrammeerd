@@ -75,13 +75,36 @@ def createlisting(request):
         price = request.POST['price']
         givedescription = request.POST['givedescription']
         objectimage = request.POST['objectimage']
+        user = request.user
 
         user = request.user
         auction = AuctionListing(
             title = object,
             price = price,
             description = givedescription,
-            image = objectimage
+            image = objectimage,
+            owner = user
         )
         auction.save()
         return HttpResponseRedirect(reverse("index"))
+
+def listing(request, title):
+    information_listing = AuctionListing.objects.get(title=title)
+    listing_in_watchlist = request.user in information_listing.watchlist.all()
+    return render(request, "auctions/listing.html", {
+        "listing": information_listing,
+        "listing_in_watchlist": listing_in_watchlist
+    })
+
+def remove(request, title):
+    listing_information = AuctionListing.objects.get(title=title)
+    user = request.user
+    listing_information.watchlist.remove(user)
+    return HttpResponseRedirect(reverse("listing",args=(title, )))
+
+
+def add(request, title):
+    listing_information = AuctionListing.objects.get(title=title)
+    user = request.user
+    listing_information.watchlist.add(user)
+    return HttpResponseRedirect(reverse("listing",args=(title, )))

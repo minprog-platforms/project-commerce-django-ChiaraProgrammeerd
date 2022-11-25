@@ -11,6 +11,8 @@ class AuctionListing(models.Model):
     price = models.FloatField()
     description = models.CharField(max_length=1000)
     active = models.BooleanField(default=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="owner")
+    watchlist = models.ManyToManyField(User, blank=True, null=True, related_name="watchlist")
 
     def __str__(self):
         return self.title
